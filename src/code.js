@@ -1,18 +1,17 @@
+const BEER = " of beer on the wall";
+
 function first_function(f_word, f_count) {
-	var f_output = "";
-	var kar = "\n";
+	var result = "";
+	var delimiter = "\n";
 	while (f_count > 0) {
-		f_output = f_output + f_count + " " + f_word + " of beer on the wall" + kar;
-		f_output = f_output + f_count + " " + f_word + " of beer," + kar;
-		f_output = f_output + "Take one down, pass it around," + kar;
+		result += f_count + " " + f_word + BEER + delimiter + f_count + " " + f_word + " of beer," + delimiter + "Take one down, pass it around," + delimiter;
 		--f_count;
 		if (f_count > 0) {
-			f_output = f_output + f_count + " " + f_word + " of beer on the wall." + kar;
-		} else {
-			f_output = f_output + "No more " + f_word + " of beer on the wall." + kar;
+			result += f_count + " " + f_word + BEER + "." + delimiter;
 		}
 	}
-	return f_output;
+	result += "No more " + f_word + BEER + "." + delimiter;
+	return result;
 }
 
 module.exports = first_function;
