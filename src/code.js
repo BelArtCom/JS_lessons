@@ -1,6 +1,3 @@
-var word = "bottles";
-var count = 99;
-
 function first_function(f_word, f_count) {
 	var f_output = "";
 	var kar = "\n";
