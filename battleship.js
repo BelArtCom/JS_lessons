@@ -1,31 +1,41 @@
-var randomLoc = Math.floor(Math.random() * 5);
-var location1 = randomLoc;
-var location2 = location1 + 1;
-var location3 = location2 + 1;
-var guess;
-var hits = 0;
-var guesses = 0;
-var isSunk = false;
+const SEA_CELLS_NUMBER = 10;
+const SHIP_CELLS_NUMBER = 5;
 
-while (isSunk == false) {
-	guess = prompt("Ready, aim, fire! (enter a number 0-6):");
-	if (guess < 0 || guess > 6) {
-		alert("Please enter a valid cell number!");
-	} else {
-		guesses = guesses + 1;
-		if (guess == location1 || guess == location2 || guess == location3) {
-			hits = hits + 1;
-			alert("HIT!");
-			if (hits == 3) {
-				isSunk = true;
-				alert("You sank my battleship!");
-			}
-		} else {
-			alert("MISS");
-		}
-	}
+const maxCellIndex = SEA_CELLS_NUMBER - 1;
+const start = Math.floor(
+  Math.random() * (SEA_CELLS_NUMBER - SHIP_CELLS_NUMBER + 1)
+);
+
+const locationList = Array.from(
+  { length: SHIP_CELLS_NUMBER },
+  (_, i) => i + start
+);
+
+let hits = 0;
+let guesses = 0;
+let isSunk = false;
+
+while (!isSunk) {
+  const guess = Number(
+    prompt(`Ready, aim, fire! (enter a number 0-${maxCellIndex}):`)
+  );
+  if (Number.isNaN(guess) || guess < 0 || guess > maxCellIndex) {
+    alert("Please enter a valid cell number!");
+  } else {
+    guesses++;
+    if (locationList.includes(guess)) {
+      hits++;
+      alert("HIT!");
+      if (hits == SHIP_CELLS_NUMBER) {
+        isSunk = true;
+        alert("You sank my battleship!");
+        const accuracy = SHIP_CELLS_NUMBER / guesses;
+        alert(
+          `You took ${guesses} guesses to sink the battleship, which means your shooting accuracy was ${accuracy}`
+        );
+      }
+    } else {
+      alert("MISS");
+    }
+  }
 }
-
-var stats = "You took " + guesses + " guesses to sink the battleship, " + "which means your shooting accuracy was " + (3/guesses);
-alert(stats);
-
