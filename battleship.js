@@ -1,8 +1,16 @@
+function calculateWorkingRange(max) {
+  let rand = Math.random() * (max + 1) + 1;
+  return Math.floor(rand);
+  
+//  let rand = Math.random() * (max + 1 - min) + 1;
+//  return Math.floor(rand);
+}
+
 const SEA_CELLS_NUMBER = 10;
 const SHIP_CELLS_NUMBER = 5;
 
-const start =
-  Math.floor(Math.random() * (SEA_CELLS_NUMBER - SHIP_CELLS_NUMBER + 1)) + 1;
+const start = calculateWorkingRange(SEA_CELLS_NUMBER - SHIP_CELLS_NUMBER);
+//  Math.floor(Math.random() * (SEA_CELLS_NUMBER - SHIP_CELLS_NUMBER + 1)) + 1;
 
 console.log("start = " + start);
 
